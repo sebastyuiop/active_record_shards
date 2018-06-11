@@ -79,4 +79,24 @@ describe "Database rake tasks" do
       out.must_include "test/helper.rb"
     end
   end
+
+  describe "abort_if_pending_migrations" do
+    before do
+      rake('db:create')
+    end
+
+    it "passes when there is no pending migrations" do
+      ActiveRecord::Migrator.any_instance.stubs(:pending_migrations).returns([])
+      out = capture_stderr { rake('db:abort_if_pending_migrations') }
+      out.must_be_empty
+    end
+
+    it "fails when migrations are pending" do
+      ActiveRecord::Migrator.any_instance.stubs(:pending_migrations).returns([stub(version: 1, name: 'Fake')])
+      out = capture_stderr do
+        rake('db:abort_if_pending_migrations') rescue nil # Catch SystemExit
+      end
+      out.must_match /You have \d+ pending migrations:/
+    end
+  end
 end
