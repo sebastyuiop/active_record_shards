@@ -29,7 +29,11 @@ matrix:
       gemfile: gemfiles/rails3.2.gemfile
     - rvm: 2.5
       gemfile: gemfiles/rails3.2.gemfile
-    - rvm: 2.5
+    - rvm: 2.2
+      gemfile: gemfiles/rails5.0.gemfile
+    - rvm: 2.3
+      gemfile: gemfiles/rails5.0.gemfile
+    - rvm: 2.4
       gemfile: gemfiles/rails5.0.gemfile
   include:
     - rvm: 2.5
