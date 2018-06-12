@@ -23,6 +23,8 @@ branches:
     - 3-7-0
 matrix:
   exclude:
+    - rvm: 2.3
+      gemfile: gemfiles/rails3.2.gemfile
     - rvm: 2.4
       gemfile: gemfiles/rails3.2.gemfile
     - rvm: 2.5
